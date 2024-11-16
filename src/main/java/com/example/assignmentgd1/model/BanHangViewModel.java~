@@ -1,0 +1,49 @@
+package com.example.assignmentgd1.model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import lombok.*;
+
+import java.util.Date;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+public class BanHangViewModel {
+
+    @Id
+    private Integer id;
+
+    private Integer idNv;
+
+    private String tenNhanVien;
+
+    private Integer idKh;
+
+    private String tenKhachHang;
+
+    @Temporal(TemporalType.DATE)
+    private Date ngayMuaHang;
+
+    private Boolean trangThai;
+
+    private Integer idSpct;
+
+    private String tenSanPham;
+
+    private Integer idKichThuoc;
+
+    private String tenKichThuoc;
+
+    private Integer idMauSac;
+
+    private String tenMauSac;
+
+    private Integer soLuong;
+
+    private Double donGia;
+}

@@ -1,0 +1,62 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Danh sách hóa đơn</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap-theme.min.css">
+</head>
+<body>
+<div class="mt-5">
+    <h2 class="mb-4 text-center">DANH SÁCH HÓA ĐƠN</h2>
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID Hóa đơn</th>
+            <th>Tên NV</th>
+            <th>Tên KH</th>
+            <th>Ngày mua hàng</th>
+            <th>ID SPCT</th>
+            <th>Tên SP</th>
+            <th>Màu sắc</th>
+            <th>Kích thước</th>
+            <th>Số lượng</th>
+            <th>Đơn giá</th>
+            <th>Trạng thái</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="hoaDon" items="${dsHoaDon}">
+            <tr>
+                <td>${hoaDon.id}</td>
+                <td>${hoaDon.tenNhanVien}</td>
+                <td>${hoaDon.tenKhachHang}</td>
+                <td>${hoaDon.ngayMuaHang}</td>
+                <td>${hoaDon.idSpct}</td>
+                <td>${hoaDon.tenSanPham}</td>
+                <td>${hoaDon.tenMauSac}</td>
+                <td>${hoaDon.tenKichThuoc}</td>
+                <td>${hoaDon.soLuong}</td>
+                <td>${hoaDon.donGia}</td>
+                <td>
+            <span class="badge ${hoaDon.trangThai ? 'badge-success' : 'badge-danger'}">
+                    ${hoaDon.trangThai ? "Đã thanh toán" : "Chưa thanh toán"}
+            </span>
+                </td>
+            </tr>
+        </c:forEach>
+
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
