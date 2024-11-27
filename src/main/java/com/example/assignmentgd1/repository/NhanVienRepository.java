@@ -10,4 +10,5 @@ import java.util.List;
 public interface NhanVienRepository extends JpaRepository<NhanVien, Integer> {
     List<NhanVien> findNhanViensByMaNv(String maNv);
     NhanVien findByTenDangNhap(String tenDangNhap);
+
 }

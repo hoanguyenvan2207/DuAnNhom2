@@ -22,4 +22,12 @@ public class NhanVien {
     private String tenDangNhap;
     private String matKhau;
     private Boolean trangThai;
+
+    public NhanVien(String ten, String maNv, String tenDangNhap, String matKhau, Boolean trangThai) {
+        this.ten = ten;
+        this.maNv = maNv;
+        this.tenDangNhap = tenDangNhap;
+        this.matKhau = matKhau;
+        this.trangThai = trangThai;
+    }
 }
