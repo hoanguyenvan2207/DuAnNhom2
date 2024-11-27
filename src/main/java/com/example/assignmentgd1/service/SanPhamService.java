@@ -13,26 +13,86 @@ public class SanPhamService {
     @Autowired
     private SanPhamRepository sanPhamRepository;
 
-    public List<SanPham> getAllSanPham() {
+    public List<SanPham> getAllSanPham()
+    {
         return sanPhamRepository.findAll();
     }
 
     public SanPham getSanPhamById(Integer id) {
-        Optional<SanPham> optionalSanPham = sanPhamRepository.findById(id);
-        if (optionalSanPham.isPresent()) {
-            return optionalSanPham.get();
+        if (id == null || id <= 0) {
+            throw new IllegalArgumentException("ID không hợp lệ.");
         }
-        return null;
+        return sanPhamRepository.findById(id).orElse(null);
     }
+
     public List<SanPham> searchSanPham(String keyword) {
+        if (keyword == null || keyword.trim().isEmpty()) {
+            throw new IllegalArgumentException("Keyword không được null hoặc rỗng.");
+        }
         return sanPhamRepository.findByMaContainingIgnoreCaseOrTenContainingIgnoreCase(keyword, keyword);
     }
 
+    public class DuplicateProductException extends RuntimeException {
+        public DuplicateProductException(String message) {
+            super(message);
+        }
+    }
+
+
     public SanPham createSanPham(SanPham sanPham) {
+        if (sanPham.getMa() == null || sanPham.getMa().isEmpty()) {
+            throw new IllegalArgumentException("Mã sản phẩm không được rỗng.");
+        }
+        if (sanPham.getTen() == null || sanPham.getTen().isEmpty()) {
+            throw new IllegalArgumentException("Tên sản phẩm không được rỗng.");
+        }
+
+        if (sanPham.getTen().trim().isEmpty()) {
+            throw new IllegalArgumentException("Tên sản phẩm không được rỗng được chỉ chứa khoảng trắng.");
+        }
+
+        if (sanPham.getTrangThai() == null) {
+            throw new IllegalArgumentException("Trạng thái sản phẩm không được null.");
+        }
+
+        if (sanPhamRepository.existsByMa(sanPham.getMa())) {
+            throw new DuplicateProductException("Mã sản phẩm đã tồn tại.");
+        }
+
+        if (sanPhamRepository.existsByTen(sanPham.getTen())) {
+            throw new DuplicateProductException("Tên sản phẩm đã tồn tại.");
+        }
+
         return sanPhamRepository.save(sanPham);
     }
 
+
     public SanPham updateSanPham(Integer id, SanPham updatedSanPham) {
+        if (id == null || id <= 0) {
+            throw new IllegalArgumentException("ID không hợp lệ.");
+        }
+
+        if (updatedSanPham == null) {
+            throw new IllegalArgumentException("Thông tin sản phẩm không được null.");
+        }
+
+        if (updatedSanPham.getMa() == null || updatedSanPham.getMa().isEmpty()) {
+            throw new IllegalArgumentException("Mã sản phẩm không được rỗng.");
+        }
+
+        if (updatedSanPham.getTen() == null || updatedSanPham.getTen().isEmpty()) {
+            throw new IllegalArgumentException("Tên sản phẩm không được rỗng.");
+        }
+
+
+        if (updatedSanPham.getTen().trim().isEmpty()) {
+            throw new IllegalArgumentException("Tên sản phẩm không được chứa chỉ khoảng trắng.");
+        }
+
+        if (updatedSanPham.getTrangThai() == null) {
+            throw new IllegalArgumentException("Trạng thái sản phẩm không được null.");
+        }
+
         Optional<SanPham> optionalSanPham = sanPhamRepository.findById(id);
         if (optionalSanPham.isPresent()) {
             SanPham existingSanPham = optionalSanPham.get();
@@ -40,9 +100,11 @@ public class SanPhamService {
             existingSanPham.setTen(updatedSanPham.getTen());
             existingSanPham.setTrangThai(updatedSanPham.getTrangThai());
             return sanPhamRepository.save(existingSanPham);
+        } else {
+            throw new IllegalArgumentException("Sản phẩm không tồn tại với ID: " + id);
         }
-        return null;
     }
+
 
     public void deleteSanPham(Integer id) {
         sanPhamRepository.deleteById(id);
