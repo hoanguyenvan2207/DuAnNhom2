@@ -26,6 +26,10 @@ public class NhanVienService {
     }
 
     public List<NhanVien> findNhanviensByMaNv(String ma) {
+        if (ma.length()<5 || ma.length()>50)  throw new ArithmeticException("nhap ma > 5 va <50 ky tu");
+        if (!ma.matches("^[a-zA-Z0-9]*$")) {
+            throw new ArithmeticException("ma khong duoc chua ky tu dac biet");
+        }
         return nhanVienRepository.findNhanViensByMaNv(ma);
     }
 
