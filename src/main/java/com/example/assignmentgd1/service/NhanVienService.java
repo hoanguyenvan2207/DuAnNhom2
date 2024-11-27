@@ -18,12 +18,13 @@ public class NhanVienService {
     }
 
     public NhanVien getNhanVienById(Integer id) {
-        Optional<NhanVien> optionalKhachHang = nhanVienRepository.findById(id);
-        if (optionalKhachHang.isPresent()) {
-            return optionalKhachHang.get();
+        if (id == null || id <= 0) {
+            throw new IllegalArgumentException("ID không hợp lệ.");
         }
-        return null;
+        Optional<NhanVien> optionalNhanVien = nhanVienRepository.findById(id);
+        return optionalNhanVien.orElse(null);
     }
+
 
     public List<NhanVien> findNhanviensByMaNv(String ma) {
         if (ma.length()<5 || ma.length()>50)  throw new ArithmeticException("nhap ma > 5 va <50 ky tu");

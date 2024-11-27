@@ -317,4 +317,58 @@ class NhanVienServiceTest {
         assertThrows(IllegalArgumentException.class, () -> nhanVienService.updateNhanVien(1, updatedNhanVien),
                 "ID không hợp lệ.");
     }
+    /////////////////////////////////////delete//////////////////////////
+    @Test
+    void testGetNhanVienByIdHopLe() {
+        NhanVien nhanVien = nhanVienService.getNhanVienById(1);
+        assertNotNull(nhanVien, "Nhân viên không được null khi ID hợp lệ.");
+    }
+    @Test
+    void testGetNhanVienByIdKhongTonTai() {
+        NhanVien nhanVien = nhanVienService.getNhanVienById(9999);
+        assertNull(nhanVien, "ID không tồn tại.");
+    }
+    @Test
+    void testGetNhanVienByIdLaNull() {
+        assertThrows(IllegalArgumentException.class, () -> nhanVienService.getNhanVienById(null),
+                "ID không hợp lệ.");
+    }
+    @Test
+    void testGetNhanVienByIdLaSoAm() {
+        assertThrows(IllegalArgumentException.class, () -> nhanVienService.getNhanVienById(-1),
+                "ID không hợp lệ.");
+    }
+    @Test
+    void testGetNhanVienByIdLaSo0() {
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> nhanVienService.getNhanVienById(0));
+        assertEquals("ID không hợp lệ.", exception.getMessage());
+    }
+    @Test
+    void testGetNhanVienByIdVoiDuLieuLon() {
+        NhanVien nhanVien = nhanVienService.getNhanVienById(Integer.MAX_VALUE);
+        assertNull(nhanVien, "ID không hợp lệ.");
+    }
+    @Test
+    void testGetNhanVienByIdHopLeVoiTrangThaiHoatDong() {
+        NhanVien nhanVien = nhanVienService.getNhanVienById(1);
+        assertTrue(nhanVien.getTrangThai(), "Nhân viên với ID hợp lệ phải có trạng thái hoạt động.");
+    }
+
+    @Test
+    void testGetNhanVienByIdKhongCoTenRong() {
+        NhanVien nhanVien = nhanVienService.getNhanVienById(1);
+        assertFalse(nhanVien.getTen().isEmpty(), "Tên nhân viên không được rỗng khi ID hợp lệ.");
+    }
+    @Test
+    void testGetNhanVienByIdVoiTenDungDinhDang() {
+        NhanVien nhanVien = nhanVienService.getNhanVienById(1);
+        assertFalse(nhanVien.getTen().matches("^[a-zA-Z\\s]+$"), "Tên nhân viên phải đúng định dạng.");
+    }
+    @Test
+    void testGetNhanVienByIdVoiMaDaiHon3KyTu() {
+        NhanVien nhanVien = nhanVienService.getNhanVienById(1);
+        assertTrue(nhanVien.getMaNv().length() > 3, "Mã nhân viên phải dài hơn 3 ký tự.");
+    }
+
 }
