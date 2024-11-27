@@ -39,13 +39,13 @@
                             <a class="nav-link text-white dropdown-toggle" href="#" role="button"
                                data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Đăng nhập</a></li>
+                                <li><a class="dropdown-item" href="/login">Đăng nhập</a></li>
                                 <li><a class="dropdown-item" href="#">Đăng kí</a></li>
                                 <li><a class="dropdown-item" href="#">Tra cứu thông tin</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#">Quên mật khẩu</a></li>
+                                <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
                             </ul>
                         </li>
                     </ul>
