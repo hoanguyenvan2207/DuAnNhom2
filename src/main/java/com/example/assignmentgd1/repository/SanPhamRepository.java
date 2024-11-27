@@ -9,4 +9,9 @@ import java.util.List;
 @Repository
 public interface SanPhamRepository extends JpaRepository<SanPham, Integer> {
     List<SanPham> findByMaContainingIgnoreCaseOrTenContainingIgnoreCase(String ma, String ten);
+
+        boolean existsByMa(String ma);
+        boolean existsByTen(String ten);
+
+
 }

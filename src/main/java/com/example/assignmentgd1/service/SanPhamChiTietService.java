@@ -29,6 +29,7 @@ public class SanPhamChiTietService {
     private MauSacRepository mauSacRepository;
 
     public List<SanPhamChiTiet> getAllSanPhamChiTiet() {
+
         return sanPhamChiTietRepository.findAll();
     }
 
@@ -36,6 +37,7 @@ public class SanPhamChiTietService {
         Optional<SanPhamChiTiet> optionalSanPhamChiTiet = sanPhamChiTietRepository.findById(id);
         return optionalSanPhamChiTiet.orElse(null);
     }
+
     public List<SanPhamChiTiet> getListSanPhamChiTietTimKiem(Integer id) {
         return sanPhamChiTietRepository.getSanPhamChiTietsById(id);
     }
@@ -43,7 +45,6 @@ public class SanPhamChiTietService {
     public List<SanPhamChiTiet> searchSanPhamChiTiet(String ma) {
         return sanPhamChiTietRepository.findSanPhamChiTietByMaspctContainsIgnoreCase(ma);
     }
-
 
     public SanPhamChiTiet saveSanPhamChiTiet(SanPhamChiTiet sanPhamChiTiet) {
         return sanPhamChiTietRepository.save(sanPhamChiTiet);

@@ -30,6 +30,6 @@ public class SanPham {
     @NotNull(message = "Vui lòng chọn trạng thái")
     private Boolean trangThai;
 
-    @OneToMany(mappedBy = "sanPham")
-    private List<SanPhamChiTiet> sanPhamChiTiets;
+
+
 }

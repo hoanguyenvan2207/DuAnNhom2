@@ -25,8 +25,10 @@ public class HoaDonService {
         return null;
     }
     public List<HoaDon> findHoaDonsById(Integer id) {
+
         return hoaDonRepository.findHoaDonsById(id);
     }
+
     public void updateHoaDon(Integer idHoaDon,HoaDon hoaDon) {
         Optional<HoaDon> optionalHoaDon = hoaDonRepository.findById(idHoaDon);
         if (optionalHoaDon.isPresent()) {
@@ -40,6 +42,7 @@ public class HoaDonService {
     }
 
     public HoaDon saveHoaDon(HoaDon hoaDon) {
+
         return hoaDonRepository.save(hoaDon);
     }
 }
