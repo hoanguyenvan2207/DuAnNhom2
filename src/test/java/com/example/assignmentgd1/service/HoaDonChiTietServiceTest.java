@@ -1,4 +1,4 @@
-package com.example.assignmentgd1.HoaDonChiTietServiceTest;
+package com.example.assignmentgd1.service;
 
 import com.example.assignmentgd1.model.HoaDon;
 import com.example.assignmentgd1.model.HoaDonChiTiet;
@@ -6,7 +6,6 @@ import com.example.assignmentgd1.model.SanPhamChiTiet;
 import com.example.assignmentgd1.repository.HoaDonChiTietRepository;
 import com.example.assignmentgd1.repository.HoaDonRepository;
 import com.example.assignmentgd1.repository.SanPhamChiTietRepository;
-import com.example.assignmentgd1.service.HoaDonChiTietService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
