@@ -100,7 +100,7 @@ class NhanVienServiceTest {
     }
 
 
-    ////////////////////////////////////////////////////
+    /////////////////////findNhanViensByMaNv///////////////////////////////
     @Test
     void testGetNhanVienByMaKhiDSRong() {
         List<NhanVien> result = nhanVienRepository.findNhanViensByMaNv("aaa");
@@ -183,7 +183,6 @@ class NhanVienServiceTest {
         NhanVien newNhanVien = new NhanVien("NV002@%#", "Nguyen Thi B", "nguyenthib", "password456", true);
         assertThrows(IllegalArgumentException.class, () -> nhanVienService.saveNhanVien(newNhanVien),
                 "Tên không được chứa ký tự đặc biệt.");
-//        Assertions.assertEquals("Tên không được chứa ký tự đặc biệt.", exception.getMessage());
     }
 
     @Test
@@ -317,7 +316,7 @@ class NhanVienServiceTest {
         assertThrows(IllegalArgumentException.class, () -> nhanVienService.updateNhanVien(1, updatedNhanVien),
                 "ID không hợp lệ.");
     }
-    /////////////////////////////////////delete//////////////////////////
+    /////////////////////////////////////findById//////////////////////////
     @Test
     void testGetNhanVienByIdHopLe() {
         NhanVien nhanVien = nhanVienService.getNhanVienById(1);
