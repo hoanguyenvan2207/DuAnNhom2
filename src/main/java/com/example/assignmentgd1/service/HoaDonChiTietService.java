@@ -15,11 +15,18 @@ public class HoaDonChiTietService {
     @Autowired
     private HoaDonChiTietRepository hoaDonChiTietRepository;
 
+    public HoaDonChiTietService(HoaDonChiTietRepository hoaDonChiTietRepository) {
+        this.hoaDonChiTietRepository = hoaDonChiTietRepository;
+    }
+
     public List<HoaDonChiTiet> getAllHoaDonChiTiet() {
         return hoaDonChiTietRepository.findAll();
     }
 
     public HoaDonChiTiet getHoaDonChiTietById(Integer id) {
+        if (id == null) {
+            return null;
+        }
         Optional<HoaDonChiTiet> optionalHoaDonChiTiet = hoaDonChiTietRepository.findById(id);
         return optionalHoaDonChiTiet.orElse(null);
     }
