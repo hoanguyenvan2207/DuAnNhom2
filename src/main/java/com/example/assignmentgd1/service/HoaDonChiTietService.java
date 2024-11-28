@@ -8,17 +8,25 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 @Service
 public class HoaDonChiTietService {
     @Autowired
     private HoaDonChiTietRepository hoaDonChiTietRepository;
 
+    public HoaDonChiTietService(HoaDonChiTietRepository hoaDonChiTietRepository) {
+        this.hoaDonChiTietRepository = hoaDonChiTietRepository;
+    }
+
     public List<HoaDonChiTiet> getAllHoaDonChiTiet() {
         return hoaDonChiTietRepository.findAll();
     }
 
     public HoaDonChiTiet getHoaDonChiTietById(Integer id) {
+        if (id == null) {
+            return null;
+        }
         Optional<HoaDonChiTiet> optionalHoaDonChiTiet = hoaDonChiTietRepository.findById(id);
         return optionalHoaDonChiTiet.orElse(null);
     }
@@ -27,8 +35,84 @@ public class HoaDonChiTietService {
         return hoaDonChiTietRepository.findHoaDonChiTietsById(id);
     }
 
-    public HoaDonChiTiet saveHoaDonChiTiet(HoaDonChiTiet hoaDonChiTiet) {
+    public HoaDonChiTiet addHoaDonChiTiet(HoaDonChiTiet hoaDonChiTiet) {
+
+        if(hoaDonChiTiet.getTrangThai() == null){
+            throw new IllegalArgumentException("Trạng thái không được để trống");
+        }
+        if(hoaDonChiTiet.getHoaDon() == null){
+            throw new IllegalArgumentException("Hoá đơn không được để trống");
+        }
+        if(hoaDonChiTiet.getSanPhamChiTiet() == null){
+            throw new IllegalArgumentException("Sản phẩm chi tiết không được để trống");
+        }
+
+        if (hoaDonChiTiet.getSoLuong() == null) {
+            throw new IllegalArgumentException("Số lượng không được để trống");
+        }
+
+        if (!isValidNumber(hoaDonChiTiet.getSoLuong().toString())) {
+            throw new IllegalArgumentException("Số lượng phải là một số hợp lệ");
+        }
+        if (hoaDonChiTiet.getSoLuong() < 0) {
+            throw new IllegalArgumentException("Số lượng không được âm.");
+        }
+
+        if (hoaDonChiTiet.getDonGia() == null) {
+            throw new IllegalArgumentException("Đơn giá không được để trống");
+        }
+
+        if (!isValidNumber(hoaDonChiTiet.getDonGia().toString())) {
+            throw new IllegalArgumentException("Đơn giá phải là một số hợp lệ");
+        }
+        if (hoaDonChiTiet.getDonGia() < 0) {
+            throw new IllegalArgumentException("Đơn giá không được âm");
+        }
+
         return hoaDonChiTietRepository.save(hoaDonChiTiet);
+    }
+
+    public HoaDonChiTiet updateHoaDonChiTiet(HoaDonChiTiet hoaDonChiTiet) {
+
+        if(hoaDonChiTiet.getTrangThai() == null){
+            throw new IllegalArgumentException("Trạng thái không được để trống");
+        }
+        if(hoaDonChiTiet.getHoaDon() == null){
+            throw new IllegalArgumentException("Hoá đơn không được để trống");
+        }
+        if(hoaDonChiTiet.getSanPhamChiTiet() == null){
+            throw new IllegalArgumentException("Sản phẩm chi tiết không được để trống");
+        }
+
+        if (hoaDonChiTiet.getSoLuong() == null) {
+            throw new IllegalArgumentException("Số lượng không được để trống");
+        }
+
+        if (!isValidNumber(hoaDonChiTiet.getSoLuong().toString())) {
+            throw new IllegalArgumentException("Số lượng phải là một số hợp lệ");
+        }
+        if (hoaDonChiTiet.getSoLuong() <= 0) {
+            throw new IllegalArgumentException("Số lượng phải lớn hơn 0");
+        }
+
+        if (hoaDonChiTiet.getDonGia() == null) {
+            throw new IllegalArgumentException("Đơn giá không được để trống");
+        }
+
+        if (!isValidNumber(hoaDonChiTiet.getDonGia().toString())) {
+            throw new IllegalArgumentException("Đơn giá phải là một số hợp lệ");
+        }
+        if (hoaDonChiTiet.getDonGia() < 0) {
+            throw new IllegalArgumentException("Đơn giá không được âm");
+        }
+
+        return hoaDonChiTietRepository.save(hoaDonChiTiet);
+    }
+
+    private boolean isValidNumber(String value) {
+        String regex = "^-?\\d*\\.?\\d+$";
+        Pattern pattern = Pattern.compile(regex);
+        return pattern.matcher(value).matches();
     }
 
     public List<HoaDonChiTiet> getHoaDonChiTietByHoaDonId(Integer hoaDonId) {

@@ -168,7 +168,7 @@ public class BanHangController {
                     HoaDonChiTiet hoaDonChiTiet = hoaDonChiTietService.findSingleBySanPhamChiTietIdAndHoaDonId(sanPhamChiTietId, hoaDonId);
                     if (hoaDonChiTiet != null) {
                         hoaDonChiTiet.setSoLuong(hoaDonChiTiet.getSoLuong() + soLuong);
-                        hoaDonChiTietService.saveHoaDonChiTiet(hoaDonChiTiet);
+                        hoaDonChiTietService.addHoaDonChiTiet(hoaDonChiTiet);
                     }
                 }
                 break;
@@ -188,7 +188,7 @@ public class BanHangController {
                 hoaDonChiTiet.setSanPhamChiTiet(sanPhamChiTiet);
                 hoaDonChiTiet.setSoLuong(soLuong);
                 hoaDonChiTiet.setDonGia(sanPhamChiTiet.getDonGia());
-                hoaDonChiTietService.saveHoaDonChiTiet(hoaDonChiTiet);
+                hoaDonChiTietService.addHoaDonChiTiet(hoaDonChiTiet);
             }
         }
 
@@ -230,7 +230,7 @@ public class BanHangController {
                 if (!hoaDonChiTiets.isEmpty()) {
                     for (HoaDonChiTiet hoaDonChiTiet : hoaDonChiTiets) {
                         hoaDonChiTiet.setSoLuong(soLuong);
-                        hoaDonChiTietService.saveHoaDonChiTiet(hoaDonChiTiet);
+                        hoaDonChiTietService.updateHoaDonChiTiet(hoaDonChiTiet);
                     }
                 }
                 break;
@@ -328,7 +328,7 @@ public class BanHangController {
             hoaDonChiTiet.setDonGia(cartItem.getDonGia());
             hoaDonChiTiet.setTrangThai(thanhToan);
 
-            hoaDonChiTietService.saveHoaDonChiTiet(hoaDonChiTiet);
+            hoaDonChiTietService.addHoaDonChiTiet(hoaDonChiTiet);
         }
 
         cartItems.clear();
@@ -428,7 +428,7 @@ public class BanHangController {
                     hoaDonChiTiet.setSoLuong(cartItem.getSoLuong());
                     hoaDonChiTiet.setDonGia(cartItem.getDonGia());
                     hoaDonChiTiet.setHoaDon(hoaDon);
-                    hoaDonChiTietService.saveHoaDonChiTiet(hoaDonChiTiet);
+                    hoaDonChiTietService.updateHoaDonChiTiet(hoaDonChiTiet);
                 }
             } else {
 
@@ -440,7 +440,7 @@ public class BanHangController {
                     newHoaDonChiTiet.setHoaDon(hoaDon);
                     newHoaDonChiTiet.setSoLuong(cartItem.getSoLuong());
                     newHoaDonChiTiet.setDonGia(cartItem.getDonGia());
-                    hoaDonChiTietService.saveHoaDonChiTiet(newHoaDonChiTiet);
+                    hoaDonChiTietService.updateHoaDonChiTiet(newHoaDonChiTiet);
                 }
             }
         }
