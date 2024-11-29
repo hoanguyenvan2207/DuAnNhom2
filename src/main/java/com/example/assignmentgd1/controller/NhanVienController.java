@@ -42,7 +42,7 @@ public class NhanVienController {
 
     @GetMapping("/update/{id}")
     public String suaNhanVienForm(@PathVariable Integer id, Model model) {
-        NhanVien nhanVien = nhanVienService.getNhanVienById(id);
+        NhanVien nhanVien = nhanVienService.getNhanVienById(id+"");
         model.addAttribute("nhanVien", nhanVien);
         return "nhan-vien/update"; // Form sửa
     }
@@ -61,7 +61,7 @@ public class NhanVienController {
 
     @GetMapping("/detail")
     public String chiTietNhanVien(@RequestParam Integer id, Model model) {
-        NhanVien nhanVien = nhanVienService.getNhanVienById(id);
+        NhanVien nhanVien = nhanVienService.getNhanVienById(id+"");
         model.addAttribute("nhanVien", nhanVien);
         return "nhan-vien/detail"; // Trang chi tiết
     }

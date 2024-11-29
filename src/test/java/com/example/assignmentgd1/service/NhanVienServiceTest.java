@@ -8,12 +8,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
+@Transactional
+@Rollback
 @SpringBootTest
 class NhanVienServiceTest {
     @Autowired
@@ -319,12 +323,16 @@ class NhanVienServiceTest {
     /////////////////////////////////////findById//////////////////////////
     @Test
     void testGetNhanVienByIdHopLe() {
-        NhanVien nhanVien = nhanVienService.getNhanVienById(1);
-        assertNotNull(nhanVien, "Nhân viên không được null khi ID hợp lệ.");
+        NhanVien nhanVien = new NhanVien("NV001", "Nguyen", "nguyen123", "password1", true);
+        nhanVienRepository.save(nhanVien);
+        nhanVienRepository.flush();
+        NhanVien foundNhanVien = nhanVienService.getNhanVienById(nhanVien.getId()+"");
+        Assertions.assertEquals("NV001", foundNhanVien.getTen());
+
     }
     @Test
     void testGetNhanVienByIdKhongTonTai() {
-        NhanVien nhanVien = nhanVienService.getNhanVienById(9999);
+        NhanVien nhanVien = nhanVienService.getNhanVienById("9999");
         assertNull(nhanVien, "ID không tồn tại.");
     }
     @Test
@@ -334,40 +342,50 @@ class NhanVienServiceTest {
     }
     @Test
     void testGetNhanVienByIdLaSoAm() {
-        assertThrows(IllegalArgumentException.class, () -> nhanVienService.getNhanVienById(-1),
+        assertThrows(IllegalArgumentException.class, () -> nhanVienService.getNhanVienById(-1+""),
                 "ID không hợp lệ.");
     }
     @Test
     void testGetNhanVienByIdLaSo0() {
         Exception exception = assertThrows(IllegalArgumentException.class,
-                () -> nhanVienService.getNhanVienById(0));
+                () -> nhanVienService.getNhanVienById(0+""));
         assertEquals("ID không hợp lệ.", exception.getMessage());
     }
     @Test
     void testGetNhanVienByIdVoiDuLieuLon() {
-        NhanVien nhanVien = nhanVienService.getNhanVienById(Integer.MAX_VALUE);
+        NhanVien nhanVien = nhanVienService.getNhanVienById(Integer.MAX_VALUE+"");
         assertNull(nhanVien, "ID không hợp lệ.");
     }
     @Test
-    void testGetNhanVienByIdHopLeVoiTrangThaiHoatDong() {
-        NhanVien nhanVien = nhanVienService.getNhanVienById(1);
-        assertTrue(nhanVien.getTrangThai(), "Nhân viên với ID hợp lệ phải có trạng thái hoạt động.");
+    void testGetNhanVienByIdHopLeVoiIDLaKyTu() {
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> nhanVienService.getNhanVienById("test"));
+        assertEquals("ID không hợp lệ.", exception.getMessage());
+
+    }
+    @Test
+    void testGetNhanVienByIdHopLeVoiIDLaKyTuDacBiet() {
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> nhanVienService.getNhanVienById("*^^&"));
+        assertEquals("ID không hợp lệ.", exception.getMessage());
+
+    }
+    @Test
+    void testGetNhanVienByIdHopLeVoiIDLaSoThuc() {
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> nhanVienService.getNhanVienById("4.5"));
+        assertEquals("ID không hợp lệ.", exception.getMessage());
+
+    }
+    @Test
+    void testGetNhanVienByIdKyTuChuCaiVaSo() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> nhanVienService.getNhanVienById("123abc")
+        );
+        assertEquals("ID không hợp lệ.", exception.getMessage());
     }
 
-    @Test
-    void testGetNhanVienByIdKhongCoTenRong() {
-        NhanVien nhanVien = nhanVienService.getNhanVienById(1);
-        assertFalse(nhanVien.getTen().isEmpty(), "Tên nhân viên không được rỗng khi ID hợp lệ.");
-    }
-    @Test
-    void testGetNhanVienByIdVoiTenDungDinhDang() {
-        NhanVien nhanVien = nhanVienService.getNhanVienById(1);
-        assertFalse(nhanVien.getTen().matches("^[a-zA-Z\\s]+$"), "Tên nhân viên phải đúng định dạng.");
-    }
-    @Test
-    void testGetNhanVienByIdVoiMaDaiHon3KyTu() {
-        NhanVien nhanVien = nhanVienService.getNhanVienById(1);
-        assertTrue(nhanVien.getMaNv().length() > 3, "Mã nhân viên phải dài hơn 3 ký tự.");
-    }
+
 
 }

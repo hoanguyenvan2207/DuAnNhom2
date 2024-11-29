@@ -17,12 +17,25 @@ public class NhanVienService {
         return nhanVienRepository.findAll();
     }
 
-    public NhanVien getNhanVienById(Integer id) {
-        if (id == null || id <= 0) {
+    public NhanVien getNhanVienById(String id) {
+        Integer parsedId;
+        if (id == null ) {
             throw new IllegalArgumentException("ID không hợp lệ.");
         }
-        Optional<NhanVien> optionalNhanVien = nhanVienRepository.findById(id);
-        return optionalNhanVien.orElse(null);
+        try {
+            if (id.matches(".*[^a-zA-Z0-9].*")) {
+                throw new IllegalArgumentException("ID không hợp lệ.");
+            }
+            parsedId = Integer.parseInt(id);
+            if ( parsedId <= 0) {
+                throw new IllegalArgumentException("ID không hợp lệ.");
+            }
+
+            Optional<NhanVien> optionalNhanVien = nhanVienRepository.findById(parsedId);
+            return optionalNhanVien.orElse(null);
+        }catch (NumberFormatException e){
+            throw new IllegalArgumentException("ID không hợp lệ.");
+        }
     }
 
 
