@@ -10,5 +10,10 @@ import java.util.Optional;
 @Repository
 public interface HoaDonRepository extends JpaRepository<HoaDon, Integer> {
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 544b846 (add unit test mauSac)
     List<HoaDon> findHoaDonsById(Integer id);
 }

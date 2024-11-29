@@ -19,4 +19,14 @@ public class MauSac {
     private String ma;
     private String ten;
     private Boolean trangThai;
+<<<<<<< HEAD
+=======
+
+    public MauSac(Integer id, Boolean trangThai, String ten, String ma) {
+        this.id = id;
+        this.trangThai = trangThai;
+        this.ten = ten;
+        this.ma = ma;
+    }
+>>>>>>> 544b846 (add unit test mauSac)
 }

@@ -51,4 +51,8 @@ public class HoaDonChiTietService {
         List<HoaDonChiTiet> hoaDonChiTietList = hoaDonChiTietRepository.findBySanPhamChiTietIdAndHoaDonId(sanPhamChiTietId, hoaDonId);
         return hoaDonChiTietList.isEmpty() ? null : hoaDonChiTietList.get(0);
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 544b846 (add unit test mauSac)
 }

@@ -9,9 +9,5 @@ import java.util.List;
 @Repository
 public interface NhanVienRepository extends JpaRepository<NhanVien, Integer> {
     List<NhanVien> findNhanViensByMaNv(String maNv);
-<<<<<<< HEAD
-    NhanVien findByTenDangNhap(String tenDangNhap);
-=======
-
->>>>>>> 544b846 (add unit test mauSac)
+    
 }
