@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface KichThuocRepository extends JpaRepository<KichThuoc, Integer> {
     List<KichThuoc> findKichThuocsByMaContainsIgnoreCase(String ma);
+
+
 }

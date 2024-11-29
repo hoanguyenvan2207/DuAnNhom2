@@ -19,4 +19,5 @@ public class KichThuoc {
     private String ma;
     private String ten;
     private Boolean trangThai;
+
 }
