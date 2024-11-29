@@ -48,11 +48,6 @@ public class KichThuocService {
         if (kichThuoc.getMa() == null || kichThuoc.getMa().isEmpty()) {
             throw new IllegalArgumentException("Mã kích thước không được để trống");
         }
-        for (KichThuoc kt : kichThuocRepository.findAll()) {
-            if (kt.getMa().equals(kichThuoc.getMa())) {
-                throw new IllegalArgumentException("Mã kích thước đã tồn tại");
-            }
-        }
         if (kichThuoc.getTen() == null || kichThuoc.getTen().isEmpty()) {
             throw new IllegalArgumentException("Tên kích thước không được để trống");
         }
@@ -64,6 +59,11 @@ public class KichThuocService {
         }
         if (kichThuoc.getTen().length() > 10) {
             throw new IllegalArgumentException("Tên phải nhỏ hơn 10 kí tự");
+        }
+        for (KichThuoc kt : kichThuocRepository.findAll()) {
+            if (kt.getMa().equals(kichThuoc.getMa())) {
+                throw new IllegalArgumentException("Mã kích thước đã tồn tại");
+            }
         }
         return kichThuocRepository.save(kichThuoc);
     }
@@ -80,6 +80,9 @@ public class KichThuocService {
         }
         if (updatedKichThuoc.getTen().length() > 10) {
             throw new IllegalArgumentException("Tên phải nhỏ hơn 10 kí tự");
+        }
+        if (updatedKichThuoc.getTrangThai() == null) {
+            throw new IllegalArgumentException("Trạng thái không được để trống");
         }
         Optional<KichThuoc> optionalKichThuoc = kichThuocRepository.findById(id);
         if (optionalKichThuoc.isPresent()) {
