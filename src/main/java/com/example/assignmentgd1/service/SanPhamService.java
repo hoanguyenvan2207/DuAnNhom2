@@ -13,9 +13,12 @@ public class SanPhamService {
     @Autowired
     private SanPhamRepository sanPhamRepository;
 
-    public List<SanPham> getAllSanPham()
-    {
-        return sanPhamRepository.findAll();
+    public List<SanPham> getAllSanPham() {
+        List<SanPham> sanPhams = sanPhamRepository.findAll();
+        if (sanPhams == null || sanPhams.isEmpty()) {
+            throw new IllegalArgumentException("Danh sách sản phẩm rỗng hoặc không tồn tại.");
+        }
+        return sanPhams;
     }
 
     public SanPham getSanPhamById(Integer id) {

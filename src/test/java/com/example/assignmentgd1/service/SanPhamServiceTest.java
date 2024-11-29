@@ -35,6 +35,8 @@ class SanPhamServiceTest {
 //        sanPhamRepository.deleteAll();
     }
 
+    //============================= Hàm getAllSanPham =====================================\\
+
     @Test
     void testGetAllSanPhamVoiSizeLonHon0() {
         List<SanPham> sanPhams = sanPhamService.getAllSanPham();
