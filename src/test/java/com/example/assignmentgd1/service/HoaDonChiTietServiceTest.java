@@ -693,7 +693,7 @@ class HoaDonChiTietServiceTest {
     void testUpdateHoaDonChiTiet_NullHoaDon(){
         SanPhamChiTiet sanPhamChiTiet = sanPhamChiTietRepository.findById(4).get();
 
-        HoaDonChiTiet hoaDonChiTiet = hoaDonChiTietRepository.findById(1022).get();
+        HoaDonChiTiet hoaDonChiTiet = hoaDonChiTietRepository.findById(1030).get();
         hoaDonChiTiet.setHoaDon(null);
         hoaDonChiTiet.setSanPhamChiTiet(sanPhamChiTiet);
         hoaDonChiTiet.setSoLuong(17);
@@ -815,3 +815,4 @@ class HoaDonChiTietServiceTest {
     }
 
 }
+
