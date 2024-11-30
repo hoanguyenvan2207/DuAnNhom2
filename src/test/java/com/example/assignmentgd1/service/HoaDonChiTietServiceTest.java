@@ -506,7 +506,8 @@ class HoaDonChiTietServiceTest {
         SanPhamChiTiet sanPhamChiTiet = sanPhamChiTietRepository.findById(1).get();
         HoaDon hoaDon = hoaDonRepository.findById(1).get();
 
-        HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
+        HoaDonChiTiet hoaDonChiTiet = hoaDonChiTietRepository.findById(1012).get();
+//        hoaDonChiTiet.setId(1012);
         hoaDonChiTiet.setHoaDon(hoaDon);
         hoaDonChiTiet.setSanPhamChiTiet(sanPhamChiTiet);
         hoaDonChiTiet.setSoLuong(27);
@@ -516,7 +517,7 @@ class HoaDonChiTietServiceTest {
         List<HoaDonChiTiet> oldList = hoaDonChiTietService.getAllHoaDonChiTiet();
         hoaDonChiTietService.addHoaDonChiTiet(hoaDonChiTiet);
         List<HoaDonChiTiet> newList = hoaDonChiTietService.getAllHoaDonChiTiet();
-        assertEquals(newList.size(), oldList.size() + 1);
+        assertEquals(newList.size(), oldList.size());
         assertEquals(27, hoaDonChiTiet.getSoLuong());
         assertEquals(25000.0, hoaDonChiTiet.getDonGia());
         assertEquals(true, hoaDonChiTiet.getTrangThai());
@@ -528,7 +529,7 @@ class HoaDonChiTietServiceTest {
         SanPhamChiTiet sanPhamChiTiet = sanPhamChiTietRepository.findById(1).get();
         HoaDon hoaDon = hoaDonRepository.findById(2).get();
 
-        HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
+        HoaDonChiTiet hoaDonChiTiet = hoaDonChiTietRepository.findById(1013).get();
         hoaDonChiTiet.setHoaDon(hoaDon);
         hoaDonChiTiet.setSanPhamChiTiet(sanPhamChiTiet);
         hoaDonChiTiet.setSoLuong(null);
@@ -550,7 +551,7 @@ class HoaDonChiTietServiceTest {
         SanPhamChiTiet sanPhamChiTiet = sanPhamChiTietRepository.findById(2).get();
         HoaDon hoaDon = hoaDonRepository.findById(1).get();
 
-        HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
+        HoaDonChiTiet hoaDonChiTiet = hoaDonChiTietRepository.findById(1016).get();
         hoaDonChiTiet.setHoaDon(hoaDon);
         hoaDonChiTiet.setSanPhamChiTiet(sanPhamChiTiet);
         hoaDonChiTiet.setSoLuong(-36);
@@ -571,7 +572,7 @@ class HoaDonChiTietServiceTest {
         SanPhamChiTiet sanPhamChiTiet = sanPhamChiTietRepository.findById(2).get();
         HoaDon hoaDon = hoaDonRepository.findById(3).get();
 
-        HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
+        HoaDonChiTiet hoaDonChiTiet = hoaDonChiTietRepository.findById(1016).get();
         hoaDonChiTiet.setHoaDon(hoaDon);
         hoaDonChiTiet.setSanPhamChiTiet(sanPhamChiTiet);
         // Cố tình truyền chuỗi thay vì số
@@ -600,7 +601,7 @@ class HoaDonChiTietServiceTest {
         SanPhamChiTiet sanPhamChiTiet = sanPhamChiTietRepository.findById(3).get();
         HoaDon hoaDon = hoaDonRepository.findById(1).get();
 
-        HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
+        HoaDonChiTiet hoaDonChiTiet = hoaDonChiTietRepository.findById(1017).get();
         hoaDonChiTiet.setHoaDon(hoaDon);
         hoaDonChiTiet.setSanPhamChiTiet(sanPhamChiTiet);
         hoaDonChiTiet.setSoLuong(17);
@@ -622,7 +623,7 @@ class HoaDonChiTietServiceTest {
         SanPhamChiTiet sanPhamChiTiet = sanPhamChiTietRepository.findById(2).get();
         HoaDon hoaDon = hoaDonRepository.findById(3).get();
 
-        HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
+        HoaDonChiTiet hoaDonChiTiet = hoaDonChiTietRepository.findById(1018).get();
         hoaDonChiTiet.setHoaDon(hoaDon);
         hoaDonChiTiet.setSanPhamChiTiet(sanPhamChiTiet);
         hoaDonChiTiet.setSoLuong(17);
@@ -643,7 +644,7 @@ class HoaDonChiTietServiceTest {
         SanPhamChiTiet sanPhamChiTiet = sanPhamChiTietRepository.findById(3).get();
         HoaDon hoaDon = hoaDonRepository.findById(2).get();
 
-        HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
+        HoaDonChiTiet hoaDonChiTiet = hoaDonChiTietRepository.findById(1020).get();
         hoaDonChiTiet.setHoaDon(hoaDon);
         hoaDonChiTiet.setSanPhamChiTiet(sanPhamChiTiet);
         hoaDonChiTiet.setSoLuong(17);
@@ -672,7 +673,7 @@ class HoaDonChiTietServiceTest {
         SanPhamChiTiet sanPhamChiTiet = sanPhamChiTietRepository.findById(1).get();
         HoaDon hoaDon = hoaDonRepository.findById(2).get();
 
-        HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
+        HoaDonChiTiet hoaDonChiTiet = hoaDonChiTietRepository.findById(1021).get();
         hoaDonChiTiet.setHoaDon(hoaDon);
         hoaDonChiTiet.setSanPhamChiTiet(sanPhamChiTiet);
         hoaDonChiTiet.setSoLuong(17);
@@ -692,7 +693,7 @@ class HoaDonChiTietServiceTest {
     void testUpdateHoaDonChiTiet_NullHoaDon(){
         SanPhamChiTiet sanPhamChiTiet = sanPhamChiTietRepository.findById(4).get();
 
-        HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
+        HoaDonChiTiet hoaDonChiTiet = hoaDonChiTietRepository.findById(1022).get();
         hoaDonChiTiet.setHoaDon(null);
         hoaDonChiTiet.setSanPhamChiTiet(sanPhamChiTiet);
         hoaDonChiTiet.setSoLuong(17);
@@ -712,7 +713,7 @@ class HoaDonChiTietServiceTest {
     void testUpdateHoaDonChiTiet_NullSPCT(){
         HoaDon hoaDon = hoaDonRepository.findById(3).get();
 
-        HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
+        HoaDonChiTiet hoaDonChiTiet = hoaDonChiTietRepository.findById(1023).get();
         hoaDonChiTiet.setHoaDon(hoaDon);
         hoaDonChiTiet.setSanPhamChiTiet(null);
         hoaDonChiTiet.setSoLuong(17);
